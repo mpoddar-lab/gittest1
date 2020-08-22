@@ -1,0 +1,295 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+#
+# Complete the 'countOptions' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER people
+#  2. INTEGER groups
+#
+
+def countOptions(people, groups, N):
+    # Write your code here
+    #N = people
+    if groups == 1:
+        return 1
+    elif groups == people:
+        return 1
+    elif N - groups +1 > people:
+        return 0
+    else:
+        return countOptions(people - 1, groups, N) + countOptions(people-1,groups-1, N-1)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    people = int(input().strip())
+
+    groups = int(input().strip())
+
+    result = countOptions(people, groups,people)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+	
+	
+	
+	
+	
+	+++++++++++++++++++++
+	
+	
+
+CREATE TABLE CITIES (
+ID VARCHAR,
+NAME VARCHAR
+)
+
+DROP TABLE USERS
+
+CREATE TABLE USERS (
+ID VARCHAR,
+CITY_ID VARCHAR,
+NAME VARCHAR,
+EMAIL VARCHAR
+)
+
+CREATE TABLE RIDES (
+ID VARCHAR,
+USER_ID VARCHAR,
+DISTANCE INT,
+FARE INT
+)
+
+
+SELECT NAME, DISTANCE
+FROM
+(
+    SELECT MAX(U.NAME) OVER(PARTITION BY U.ID) AS NAME, 
+    SUM(R.distance) OVER(PARTITION BY U.ID) AS DISTANCE,
+    RANK () OVER(ORDER BY SUM (R.DISTANCE) DESC) AS RNK
+    FROM USERS U INNER JOIN RIDES R ON U.ID = R.USER_ID 
+	GROUP BY NAME, DISTANCE, U.ID
+) TEMP_TABLE  WHERE RNK <=100
+ORDER BY DISTANCE DESC, NAME ASC
+
+SELECT NAME, DISTANCE FROM (
+(
+	SELECT ID, NAME, DISTANCE, ROWNUM AS RNK FROM
+	(
+		SELECT U.ID AS ID, MAX(U.NAME) AS NAME, SUM(R.DISTANCE) AS DISTANCE FROM USERS U INNER JOIN RIDES R
+		ON U.ID = R.USER_ID  GROUP BY U.ID
+	) ORDER BY DISTANCE DESC
+) WHERE RNK < =100 ORDER BY DISTANCE DESC NAME ASC
+	
+	
+	
+	
+SELECT NAME, DISTANCE FROM
+(
+    SELECT ID, NAME, DISTANCE, ROWNUM AS RNK FROM
+    (
+        SELECT U.ID AS ID, MAX(U.NAME) AS NAME, SUM(R.DISTANCE) AS DISTANCE FROM USERS U INNER JOIN RIDES R
+        ON U.ID = R.USER_ID  GROUP BY U.ID ORDER BY DISTANCE DESC
+    ) 
+) WHERE RNK < =100 ORDER BY DISTANCE DESC, NAME ASC ;
+++++++++++++++++++++
+
+
+A = "abcdecdefghijfgh"
+N = len(A)
+starting_pos = ending_pos = prev_max_length = prev_starting_pos = prev_ending_pos = 0
+dict = {}
+
+for i in range(starting_pos, len(A), 1):
+	dict[A[starting_pos]] = starting_pos
+	for j in range(ending_pos+1, len(A), 1):
+		if A[j] in dict:
+			current_max_length = j - i
+			if prev_max_length < current_max_length:
+				prev_starting_pos = starting_pos
+				prev_ending_pos = ending_pos
+				prev_max_length = current_max_length
+			starting_pos = dict[A[j]]+1
+			ending_pos = j
+			break
+		else:
+			dict[A[j]] = j
+		
+
+
+
+++++++++++++++++++++++++++++++
+
+A = [0,1,1, 1, 0,1,1]
+M = len(A)
+
+A = [1,0,1,0,0]
+
+counter = M-1
+p = 0
+
+
+for i in range(0, M-p , 1):
+	
+	if A[i] == 0:
+		continue
+	for j in range (counter, M-i, -1):
+		p = p+1
+		if A[j] == 1:
+			continue
+		else:
+			x = A[i]
+			A[i] = A[j]
+			A[j] = x
+			counter = j
+			break
+			
+			
+			
+
+			
+
+
+			
+
+df = spark.read.csv
+
+
+A = "abcd"
+p = 1
+
+def perm(a):\
+	if len(a)==1:\
+		return a\
+	else:\
+		p = len(a)*perm(a[1:len(a)])
+
+
+
+		
+def perm(a):
+
+	if len(a)==1:
+		return a
+	else:
+		for i in range(0, len(a), 1):
+			return a[i]+perm(a[0:i] + a[i+1:len(a)])
+			
+			
+			
+Find overlap of different meeting ranges.
+Get the treenode level by level.
+String permutation.
+Bit manipulation 
+Maximum matching parenthesis in input string
+LL queue (Blocking queue) implementation
+Fuzzy score (on given two strings, find the matching score based on similar chars)
+The last question was how to implement read the last 10 lines of 10 GB file. 
+The first question asked was how would I validated if a given string can be rearranged into a palindrome or not.The I was asked to maintain the order of the characters which were present in the original string.
+I was asked a simple question to print the Nth prime.
+Q: Given an int, determine if it is a perfect square or not, without using functions with best time complexity.
+Q: What happens when you submit a query to hive.
+find next lexicographical seq after a given sequence
+How does MYSQL indexes implemented wrt to data structure involved? Why a Btree?  
+1. Given a sorted int array, find the first pair whose sum add up to a given number
+Ex : int arr = [1,2,3,4,5,6]; num = 10, Output : 4,6
+
+2. Reverse a String
+
+
+One of the questions was regarding how I would handle a situation with a team member who was causing a conflict.  
+
+Given a array of positive and negative numbers move all the negative numbers to the right side of the array.
+-Linked list question.
+-Architecture related questions.
+
+--Many SQL based questions and database concepts like joins, queries etc.
+
+
+
+	EAR-CHAR-JET-HAP_-
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1. Validation Rules
+2. Where to apply those validation rules
+Person --> Name, Age, CollegeJoiningDate, RecruitmentDate, SSN, Title
+
+SSN is not Null
+RecruitmentDate > CollegeJoiningDate
+
+Job Table --> 
+SSN   Company  StartingDate		EndDate
+
+RecruitementDate between StartingDate and End Date
+
+Title Table
+TitleName (Mr, Mrs, Dr.)
+
+Title from Person name should be 
+
+Data Model:
+
+Source   Source Type   Location  	Column 		Validation_Rule  Function_Call
+Person		File		/././		SSN			Not Null			
+Person 		File
+
+ValodationRule
+ValidationRule, Columns, NotNull, Function
+BirthDate							
+		
+
+Nullable or not, 
+Column values limit
+
+Funtion ---> Common validation rules, Python
+Objects
+
+/Dir/Person.txt
+
+Passing a list of Validation_Rule_1()
+
+ValidationRule(SourceObjects, RuleFunction_DOB, [])
+
+RuleFunction_Title{
+
+Title []Santhosh Desikachari
+
+}45511255455   6255 9532 2073
+ArgumentSeqNo determines the order of arguments being passed to the vaidation function.
+For example - if we want to implement a check that deptName of employee table should be one of the values available in deptName column of department table then
+while calling validation function, we need to pass following parameters apart - 1. Employee, 2. DepartmentName, 3. ConnectionString for DB habing employee table, 4. Department, 5. DepartmentName, 6. ConnectionString for DB holding Department table. First three parameters are from the source side whose values need to be validated and these are available from Entity_Validation Table's EntityName, AttributeName, Location(this will hold the connection string for DB SourceType). Rest 3 parameters have to be added as one row for each parameter.
+
+
+system design/program management/current project or amy other problem
+
+Scenario based qs on program management like how do you resolve conflicts among peer, How did u handle multiple delivery deadlines, How did u u do scoping, Requirement gathering stuff etc...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
